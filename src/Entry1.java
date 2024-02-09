@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Entry1 {
     public static void main(String[] args) {
@@ -62,6 +62,55 @@ public class Entry1 {
 
 
 
+//        ************************************************************************************************************
+         List<Product> productList=new LinkedList<>();
+         productList.add(new Product(101,"Laptop",34000));
+        productList.add(new Product(103,"TV",50000));
+        productList.add(new Product(102,"Mobile",30000));
+        productList.add(new Product(104,"Refrigerator",20000));
+        productList.add(new Product(105,"Bike",100000));
+        productList.add(new Product(106,"Tablet",60000));
+
+        Optional<Product> maxPriceProduct=productList.stream().max((p1,p2)->Double.compare(p1.getPrice(),p2.getPrice()));
+        maxPriceProduct.ifPresent(Product-> System.out.println(Product.getPrice()));
+//
+//
+//
+//         List<Float>  pr=productList.stream()
+//                 .filter(product -> product.getPrice()>30000)
+//                 .map(product -> product.getPrice())
+//                 .collect(Collectors.toList());
+//
+//
+//        System.out.println("*".repeat(23));
+//
+//        List<Float> productPriceList2 =productList.stream()
+//                .filter(p -> p.getPrice() > 30000)// filtering data
+//                .map(p->p.getPrice())        // fetching price
+//                .collect(Collectors.toList()); // collecting as list
+//        System.out.println(productPriceList2);
+
+
+//  show the deatils of those product name whose product price is 60000
+//        System.out.println("*".repeat('^'));
+              productList.stream()
+                      .filter(product -> product.getPrice()==60000)
+                      .forEach(product -> System.out.println(product.getName()));
+
+
+
+              productList.stream()
+                      .distinct().filter(product -> Boolean.parseBoolean(product.getName().substring(0,1))).forEach(product -> System.out.println(product));
+
+              List<Integer> integerList= Arrays.asList(1,2,3,45,23,4,23);
+
+              Optional<Integer> maxInteger =integerList.stream()
+                      .max(Integer::compareTo);
+              maxInteger.ifPresent(p-> System.out.println("Max number"+p));
+
+
+              Optional<Integer> minelement=integerList.stream().min(Integer::compareTo);
+              minelement.ifPresent(System.out::println);
     }
 
 }
